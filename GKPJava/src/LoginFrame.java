@@ -3,6 +3,7 @@ import java.awt.event.*;
 
 public class LoginFrame{
 
+    public  DBConnector Databass;
     private Frame login;
     private Label laUser;
     private Label laPasswd;
@@ -28,9 +29,6 @@ public class LoginFrame{
         this.tfUser = new TextField("",10);
         this.tfPasswd = new TextField("",10);
 
-        this.tfUser.setText("cbb108026");
-        this.tfPasswd.setText("dj84n0vul3");
-
         tfPasswd.setEchoChar('*');
         this.btnFalse=new Button("Cancel");
         this.btnFalse.addMouseListener(new MouseAdapter(){
@@ -41,11 +39,10 @@ public class LoginFrame{
         this.btnTrue = new Button("Enter");
         this.btnTrue.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                
+                DBConnector.Login(tfUser.getText(),tfPasswd.getText());
             }
         });
 
-        
         login.add(laUser);
         login.add(tfUser);
         login.add(laPasswd);
@@ -53,5 +50,7 @@ public class LoginFrame{
         login.add(btnFalse);
         login.add(btnTrue);
         login.setVisible(true);
+    
+        
     }
 }
