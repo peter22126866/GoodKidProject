@@ -3,7 +3,7 @@ import java.awt.event.*;
 
 public class LoginFrame{
 
-    public  DBConnector Databass;
+    public  DBConnector Database = new DBConnector();
     private Frame login;
     private Label laUser;
     private Label laPasswd;
@@ -39,7 +39,7 @@ public class LoginFrame{
         this.btnTrue = new Button("Enter");
         this.btnTrue.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                DBConnector.Login(tfUser.getText(),tfPasswd.getText());
+                Database.Login(tfUser.getText(),tfPasswd.getText());
             }
         });
 

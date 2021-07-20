@@ -1,16 +1,15 @@
 import java.sql.*;
-
 import javax.swing.JOptionPane;
 
 public class DBConnector {
-    private String url = "jdbc:mysql://web.csie.nptu.edu.tw:3306/cbb108026_GKPtest";
+    private String url = "jdbc:mysql://web.csie2.nptu.edu.tw:3306/cbb108026_GKPtest";
     private String user = "cbb108026";
     private String password = "dj84n0vul3";
     public boolean isConnect = false;
 
     Connection conn = null;
-    static Statement stmt = null;
-    static ResultSet rs = null;
+    Statement stmt = null;
+    ResultSet rs = null;
 
     public DBConnector()
     {
@@ -34,9 +33,11 @@ public class DBConnector {
         }
     }
 
-    public static void Login(String user, String password) {
+    public void Login(String user, String password) {
         try{
-            rs = stmt.executeQuery("SELECT * FROM Login WHERE "); ///<<要記得改
+            rs = stmt.executeQuery("SELECT * FROM Login WHERE SSID='"+user+"' AND pass_word='"+password+"'");
+            rs.next();
+            System.out.printf("%s %s %d\n",rs.getString("SSID"),rs.getString("pass_word"),rs.getInt("identity"));
         }catch(Exception e)
         {
             e.printStackTrace();
