@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.swing.JOptionPane;
+
 public class LoginFrame{
 
     public  DBConnector Database = new DBConnector();
@@ -39,7 +41,16 @@ public class LoginFrame{
         this.btnTrue = new Button("Enter");
         this.btnTrue.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                Database.Login(tfUser.getText(),tfPasswd.getText());
+                int temp = Database.Login(tfUser.getText(),tfPasswd.getText());
+                if(temp == 0){
+                    //new KidFrame(ssid);
+                    login.setVisible(false);
+                }else if(temp == 1){
+                    new ParentFrame(tfUser.getText());
+                    login.setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(null, "登入失敗", "錯誤", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 

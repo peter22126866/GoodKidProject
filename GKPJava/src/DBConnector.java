@@ -1,5 +1,4 @@
-import java.sql.*;
-import javax.swing.JOptionPane;
+import java.sql.*; 
 
 public class DBConnector {
     private String url = "jdbc:mysql://web.csie2.nptu.edu.tw:3306/cbb108026_GKPtest";
@@ -33,15 +32,29 @@ public class DBConnector {
         }
     }
 
-    public void Login(String user, String password) {
+    public int Login(String user, String password) {
         try{
             rs = stmt.executeQuery("SELECT * FROM Login WHERE SSID='"+user+"' AND pass_word='"+password+"'");
             rs.next();
             System.out.printf("%s %s %d\n",rs.getString("SSID"),rs.getString("pass_word"),rs.getInt("identity"));
+            return rs.getInt("identity");
         }catch(Exception e)
         {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "登入失敗", "錯誤", JOptionPane.ERROR_MESSAGE);
+            return 2;
+        }
+    }
+
+    public int addPoint(String parent_ssid, String kid_ssid) {
+        try{
+            rs = stmt.executeQuery("update Kid set point=point+1 where SSID='"+kid_ssid+"'"); //無法做數據操作，下次記得查
+            rs.next();
+            System.out.printf("%s %s %d\n",rs.getString("SSID"),rs.getString("pass_word"),rs.getInt("identity"));
+            return 0;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return 1;
         }
     }
 }
